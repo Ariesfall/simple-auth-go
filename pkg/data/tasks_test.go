@@ -19,6 +19,27 @@ var (
 	}
 )
 
+func TestTaskCreate(t *testing.T) {
+	type args struct {
+		db *sqlx.DB
+		in *Tasks
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{"test1", args{db, sampleData}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := TaskCreate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
+				t.Errorf("TaskCreate() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
 func TestTaskGet(t *testing.T) {
 	type args struct {
 		db *sqlx.DB
@@ -41,27 +62,6 @@ func TestTaskGet(t *testing.T) {
 			}
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("TaskGet() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func TestTaskCreate(t *testing.T) {
-	type args struct {
-		db *sqlx.DB
-		in *Tasks
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		{"test1", args{db, sampleData}, false},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := TaskCreate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
-				t.Errorf("TaskCreate() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}
