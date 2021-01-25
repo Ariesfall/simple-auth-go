@@ -11,7 +11,7 @@ import (
 var (
 	// SampleConn is the sample connection
 	SampleConn = &MysqlConn{
-		Dsn:             "user:password@/demo",
+		Dsn:             "root:root@(127.0.0.1:3306)/demo",
 		ConnMaxLiftTime: 3,
 		MaxOpenConns:    10,
 		MaxIdleConns:    2,

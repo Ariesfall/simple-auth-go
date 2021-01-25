@@ -10,7 +10,7 @@ import (
 
 var (
 	db         = conn.Connectdb(conn.SampleConn)
-	sampleData = &Usrs{
+	sampleData = &Tasks{
 		ID:         1,
 		Name:       "demo",
 		DueDate:    "2021-10-01",
@@ -19,37 +19,37 @@ var (
 	}
 )
 
-func TestUserGet(t *testing.T) {
+func TestTaskGet(t *testing.T) {
 	type args struct {
 		db *sqlx.DB
-		in *Usrs
+		in *Tasks
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    *Usrs
+		want    *Tasks
 		wantErr bool
 	}{
 		{"test1", args{db, sampleData}, sampleData, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := UserGet(tt.args.db, tt.args.in)
+			got, err := TaskGet(tt.args.db, tt.args.in)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("UserGet() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("TaskGet() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("UserGet() = %v, want %v", got, tt.want)
+				t.Errorf("TaskGet() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestUserCreate(t *testing.T) {
+func TestTaskCreate(t *testing.T) {
 	type args struct {
 		db *sqlx.DB
-		in *Usrs
+		in *Tasks
 	}
 	tests := []struct {
 		name    string
@@ -60,17 +60,17 @@ func TestUserCreate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := UserCreate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
-				t.Errorf("UserCreate() error = %v, wantErr %v", err, tt.wantErr)
+			if err := TaskCreate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
+				t.Errorf("TaskCreate() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}
 }
 
-func TestUserUpdate(t *testing.T) {
+func TestTaskUpdate(t *testing.T) {
 	type args struct {
 		db *sqlx.DB
-		in *Usrs
+		in *Tasks
 	}
 	tests := []struct {
 		name    string
@@ -81,17 +81,17 @@ func TestUserUpdate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := UserUpdate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
-				t.Errorf("UserUpdate() error = %v, wantErr %v", err, tt.wantErr)
+			if err := TaskUpdate(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
+				t.Errorf("TaskUpdate() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}
 }
 
-func TestUserDelete(t *testing.T) {
+func TestTaskDelete(t *testing.T) {
 	type args struct {
 		db *sqlx.DB
-		in *Usrs
+		in *Tasks
 	}
 	tests := []struct {
 		name    string
@@ -102,8 +102,8 @@ func TestUserDelete(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if err := UserDelete(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
-				t.Errorf("UserDelete() error = %v, wantErr %v", err, tt.wantErr)
+			if err := TaskDelete(tt.args.db, tt.args.in); (err != nil) != tt.wantErr {
+				t.Errorf("TaskDelete() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
 	}

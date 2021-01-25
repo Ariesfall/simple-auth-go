@@ -10,17 +10,17 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-func UserGet(db *sqlx.DB) http.HandlerFunc {
+func TaskGet(db *sqlx.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id := r.URL.Query().Get("id")
 		if id == "" {
-			writeErrorStatus(w, errors.New("User id not found"))
+			writeErrorStatus(w, errors.New("Task id not found"))
 			return
 		}
 
 		idint, _ := strconv.Atoi(id)
-		in := &data.Usrs{ID: idint}
-		res, err := data.UserGet(db, in)
+		in := &data.Tasks{ID: idint}
+		res, err := data.TaskGet(db, in)
 		if err != nil {
 			writeErrorStatus(w, err)
 			return
@@ -30,15 +30,15 @@ func UserGet(db *sqlx.DB) http.HandlerFunc {
 	}
 }
 
-func UserCreate(db *sqlx.DB) http.HandlerFunc {
+func TaskCreate(db *sqlx.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		in := &data.Usrs{}
+		in := &data.Tasks{}
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}
 
-		err = data.UserCreate(db, in)
+		err = data.TaskCreate(db, in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}
@@ -47,15 +47,15 @@ func UserCreate(db *sqlx.DB) http.HandlerFunc {
 	}
 }
 
-func UserUpdate(db *sqlx.DB) http.HandlerFunc {
+func TaskUpdate(db *sqlx.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		in := &data.Usrs{}
+		in := &data.Tasks{}
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}
 
-		err = data.UserUpdate(db, in)
+		err = data.TaskUpdate(db, in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}
@@ -64,15 +64,15 @@ func UserUpdate(db *sqlx.DB) http.HandlerFunc {
 	}
 }
 
-func UserDelete(db *sqlx.DB) http.HandlerFunc {
+func TaskDelete(db *sqlx.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		in := &data.Usrs{}
+		in := &data.Tasks{}
 		err := json.NewDecoder(r.Body).Decode(in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}
 
-		err = data.UserDelete(db, in)
+		err = data.TaskDelete(db, in)
 		if err != nil {
 			writeErrorStatus(w, err)
 		}

@@ -18,5 +18,5 @@ func newJwtCookie(w http.ResponseWriter, r *http.Request) {
 	})
 
 	http.SetCookie(w, &http.Cookie{Name: "jwt", Value: tokenString})
-	w.Write([]byte("You got a new jwt Cookie, it will expire in 3600s"))
+	w.Write([]byte("You got a new jwt Cookie, it will expire in 3600s - " + tokenString))
 }
