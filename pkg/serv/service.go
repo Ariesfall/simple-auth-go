@@ -58,7 +58,7 @@ func service() {
 		r.Get("/task", handler.TaskGet(db))
 		r.Post("/task", handler.TaskCreate(db))
 		r.Put("/task", handler.TaskUpdate(db))
-		r.Post("/task", handler.TaskDelete(db))
+		r.Delete("/task", handler.TaskDelete(db))
 	})
 
 	// port listen
